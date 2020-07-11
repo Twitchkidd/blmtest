@@ -8,9 +8,11 @@ def main():
     with open("./repo.txt", 'r') as repoF:
         tokenRepoScope = repoF.read(40)
     gbmm = Popen(
-        ["git", "branch", "-m", "master", "main"], stdout=PIPE, stderr=PIPE).wait()
+        ["git", "branch", "-m", "master", "main"], stdout=PIPE, stderr=PIPE)
+    gbmmStdout, gbmmStderr = gbmm.communicate()
     gpom = Popen(
-        ["git", "push", "-u", "origin", "master"], stdout=PIPE, stderr=PIPE).wait()
+        ["git", "push", "-u", "origin", "master"], stdout=PIPE, stderr=PIPE)
+    gpomStdout, gpomStderr = gpom.communicate()
     url = "https://api.github.com/repos/Twitchkidd/test"
     params = json.dumps({"default_branch": "main"})
     headers = {"Authorization": 'token ' + tokenRepoScope}
@@ -22,8 +24,9 @@ def main():
     else:
         print(
             f"Default branch for test updated to main!")
-    gpom = Popen(
-        ["git", "push", "--delete", "origin", "master"], stdout=PIPE, stderr=PIPE).wait()
+    gpd = Popen(
+        ["git", "push", "--delete", "origin", "master"], stdout=PIPE, stderr=PIPE)
+    gpdStdout, gpdStderr = gpd.communicate()
     sys.exit()
 
 
