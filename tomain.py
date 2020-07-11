@@ -1,5 +1,5 @@
 import json
-import subprocess
+from subprocess import Popen, PIPE
 import requests
 import sys
 
@@ -8,10 +8,9 @@ def main():
     with open("./repo.txt", 'r') as repoF:
         tokenRepoScope = repoF.read(40)
     gbmm = subprocess.Popen(
-        ["git", "branch", "-m", "master", "main"]).wait()
-    # gpom = subprocess.Popen(["git", "push", "-u", "origin", "master"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        ["git", "branch", "-m", "master", "main"], shell=True, stdout=PIPE, stderr=PIPE).wait()
     gpom = subprocess.Popen(
-        ["git", "push", "-u", "origin", "master"]).wait()
+        ["git", "push", "-u", "origin", "master"], shell=True, stdout=PIPE, stderr=PIPE).wait()
     url = "https://api.github.com/repos/Twitchkidd/test"
     params = json.dumps({"default_branch": "main"})
     headers = {"Authorization": 'token ' + tokenRepoScope}
@@ -24,7 +23,7 @@ def main():
         print(
             f"Default branch for test updated to main!")
     gpom = subprocess.Popen(
-        ["git", "push", "--delete", "origin", "master"]).wait()
+        ["git", "push", "--delete", "origin", "master"], shell=True, stdout=PIPE, stderr=PIPE).wait()
     sys.exit()
 
 
