@@ -8,12 +8,12 @@ def main():
     with open("./repo.txt", 'r') as repoF:
         tokenRepoScope = repoF.read(40)
     gbmm = subprocess.Popen(
-        ["git", "branch", "-m", "master", "main"], shell=True, stdout=subprocess.PIPE)
+        ["git", "branch", "-m", "master", "main"]).wait()
     # gpom = subprocess.Popen(["git", "push", "-u", "origin", "master"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     gpom = subprocess.Popen(
-        ["git", "push", "-u", "origin", "main"], shell=True, stdout=subprocess.PIPE)
+        ["git", "push", "-u", "origin", "master"]).wait()
     url = "https://api.github.com/repos/Twitchkidd/test"
-    params = json.dumps({"default_branch": "master"})
+    params = json.dumps({"default_branch": "main"})
     headers = {"Authorization": 'token ' + tokenRepoScope}
     patchDefaultResponse = requests.patch(url, data=params, headers=headers)
     if patchDefaultResponse.status_code >= 400:
@@ -22,9 +22,9 @@ def main():
         sys.exit()
     else:
         print(
-            f"Default branch for dep-server updated to main!")
-    subprocess.Popen(["git", "push", "--delete", "origin",
-                      "main"], shell=True, stdout=subprocess.PIPE)
+            f"Default branch for test updated to main!")
+    gpom = subprocess.Popen(
+        ["git", "push", "--delete", "origin", "master"]).wait()
     sys.exit()
 
 
