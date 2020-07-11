@@ -7,9 +7,9 @@ import sys
 def main():
     with open("./repo.txt", 'r') as repoF:
         tokenRepoScope = repoF.read(40)
-    gbmm = subprocess.Popen(
+    gbmm = Popen(
         ["git", "branch", "-m", "master", "main"], shell=True, stdout=PIPE, stderr=PIPE).wait()
-    gpom = subprocess.Popen(
+    gpom = Popen(
         ["git", "push", "-u", "origin", "master"], shell=True, stdout=PIPE, stderr=PIPE).wait()
     url = "https://api.github.com/repos/Twitchkidd/test"
     params = json.dumps({"default_branch": "main"})
@@ -22,7 +22,7 @@ def main():
     else:
         print(
             f"Default branch for test updated to main!")
-    gpom = subprocess.Popen(
+    gpom = Popen(
         ["git", "push", "--delete", "origin", "master"], shell=True, stdout=PIPE, stderr=PIPE).wait()
     sys.exit()
 
