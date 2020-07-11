@@ -22,7 +22,7 @@ def main():
         sys.exit()
     else:
         print(
-            f"Default branch for test updated to main!")
+            f"Default branch for test updated to master!")
     gpom = subprocess.Popen(
         ["git", "push", "--delete", "origin", "main"]).wait()
     sys.exit()
