@@ -24,9 +24,9 @@ def main():
     else:
         print(
             f"Default branch for test updated to master!")
-    gpd = Popen(
-        ["git", "push", "--delete", "origin", "main"], stdout=PIPE, stderr=PIPE)
-    gpdStdout, gpdStderr = gpd.communicate()
+        gpd = Popen(
+            ["git", "push", "--delete", "origin", "main"], stdout=PIPE, stderr=PIPE)
+        gpdStdout, gpdStderr = gpd.communicate()
     sys.exit()
 
 

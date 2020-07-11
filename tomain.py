@@ -11,7 +11,7 @@ def main():
         ["git", "branch", "-m", "master", "main"], stdout=PIPE, stderr=PIPE)
     gbmmStdout, gbmmStderr = gbmm.communicate()
     gpom = Popen(
-        ["git", "push", "-u", "origin", "master"], stdout=PIPE, stderr=PIPE)
+        ["git", "push", "-u", "origin", "main"], stdout=PIPE, stderr=PIPE)
     gpomStdout, gpomStderr = gpom.communicate()
     url = "https://api.github.com/repos/Twitchkidd/test"
     params = json.dumps({"default_branch": "main"})
@@ -24,9 +24,9 @@ def main():
     else:
         print(
             f"Default branch for test updated to main!")
-    gpd = Popen(
-        ["git", "push", "--delete", "origin", "master"], stdout=PIPE, stderr=PIPE)
-    gpdStdout, gpdStderr = gpd.communicate()
+        gpd = Popen(
+            ["git", "push", "--delete", "origin", "master"], stdout=PIPE, stderr=PIPE)
+        gpdStdout, gpdStderr = gpd.communicate()
     sys.exit()
 
 
